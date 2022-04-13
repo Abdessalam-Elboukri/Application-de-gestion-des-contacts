@@ -1,0 +1,58 @@
+a{
+    text-decoration: none !important; 
+}
+.back{
+    /* background-image: url(images/Group\ 932.png); */
+    background-size: 100%;
+}
+.bg-azure{
+    background: azure;
+    box-shadow: 0px 7px 6px rgba(0, 0, 0, 0.123);
+}
+.color-red{
+    color:rgb(255, 102, 105);
+}
+input[type="email"],input[type="text"]{
+    font-size: 13px !important;
+    color: rgba(0, 0, 0, 0.582) !important;
+}
+.shadow_1{
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.151);
+}
+.home-page{
+    background-color: azure;
+    border-radius: 12px;
+}
+.img-section{
+    flex-basis: 45%;
+}
+.img-section img{
+    width: 125%;
+}
+/* .continr{
+    gap: 25px;
+} */
+.oper-buttons{
+    gap: 25px;
+}
+.oper-buttons a , .oper-buttons input{
+    font-size: 15px;
+    color: white;
+    padding: 4px 25px;
+    background-color: rgb(255, 102, 105);
+    border-radius: 25px;
+    box-shadow: 0 6px 5px rgba(0, 0, 0, 0.123);
+    border:none;
+}
+.signup input{
+    height: 35px;
+}
+.signup label{
+    font-size: 13px;
+}
+.fs-7{
+    font-size: 12px;
+}
+.m0{
+    margin: 0 !important;
+}
