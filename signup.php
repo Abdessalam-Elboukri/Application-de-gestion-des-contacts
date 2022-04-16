@@ -25,23 +25,28 @@
                             <div class=" d-flex flex-column text-muted col-sm-6 align-items-start">
                                 <label for="">First name</label>
                                 <input type="text" name="f-name" id="" value=""  class="w-100 rounded-3 border p-2 form-control">
+                                <p class="error_style fname_error"></p>
                             </div>
                             <div class=" d-flex flex-column text-muted col-sm-6 align-items-start">
                                 <label for="">Last name</label>
                                 <input type="text" name="l-name" id="" value=""  class="w-100 rounded-3 border p-2 form-control">
+                                <p class="error_style lname_error"></p>
                             </div>
                         </div>
                             <div class=" d-flex flex-column text-muted align-items-start ">
                                 <label for="">E-mail</label>
                                 <input type="email" name="email" id="" value=""  class="w-100 rounded-3 border p-2 form-control">
+                                <p class="error_style email_error"></p>
                             </div>
                             <div class=" d-flex flex-column text-muted mt-3 align-items-start">
                                 <label for="">Password</label>
                                 <input type="password" name="password" id="" value=""  class="w-100 rounded-3 border p-2 form-control">
+                                <p class="error_style pass_error"></p>
                             </div> 
                             <div class=" d-flex flex-column text-muted mt-3 align-items-start">
                                 <label for="">Comfirm Password</label>
                                 <input type="password" name="password" id="" value=""  class="w-100 rounded-3 border p-2 form-control">
+                                <p class="error_style pass_error"></p>
                             </div>
                             <div class="oper-buttons d-flex justify-content-center flex-wrap mt-3">
                                 <input type="submit" value="SignUp" name="sign_user" class="">

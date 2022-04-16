@@ -25,10 +25,12 @@
                                     <div class=" d-flex flex-column text-muted align-items-start ">
                                         <label for="">E-mail</label>
                                         <input type="email" name="email" id="" value=""  class="w-100 rounded-3 border p-2 form-control">
+                                        <p class="error_style email_error"></p>
                                     </div>
                                     <div class=" d-flex flex-column text-muted mt-3 align-items-start">
                                         <label for="">Password</label>
                                         <input type="password" name="password" id="" value=""  class="w-100 rounded-3 border p-2 form-control">
+                                        <p class="error_style pass_error"></p>
                                     </div> 
                                     <div class="d-flex justify-content-end fs-7">
                                         <a href="#">Forgot your password ?</a>
@@ -50,3 +52,6 @@
             </div>
         </div>
     </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
