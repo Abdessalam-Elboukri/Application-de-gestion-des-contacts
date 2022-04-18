@@ -1,4 +1,30 @@
+<?php 
+    include_once('sql/config.php');
+    include_once('sql/user.php');
+    include_once('sql/contacts.php');
 
+    $contact = new Contacts($conn);
+    $contact -> getContacts();
+    // $sql = "SELECT * FROM `contacts` where `id_user` = ? ";
+    
+    // $pre =$conn ->prepare($sql);
+    // session_start();
+    // $pre ->bindParam(1,$_SESSION['id_user'],PDO::PARAM_INT);
+    // var_dump($_SESSION['id_user']);
+    // $pre ->execute();
+    // session_write_close();
+
+//    _______add contact___________
+if(isset($_POST['sub_add_contact'])){
+    $user = new User($conn);
+    $user->add_contact($_POST['image'] ,$_POST['f-name'] ,$_POST['l-name'] ,$_POST['email'] ,$_POST['phone'] ,$_POST['address']);
+    header('location:./contact.php');
+}
+//create function to refresh page
+
+
+//_________end add contact____________
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,14 +77,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
+                            <?php 
+                             while($row =  $result){
+                                 
+                               
+                            ?>
                             <tr class="bg-white shadow">
                                 <td class="align-middle">
-                                    <img src="images/profiles/3.png" width="60" height="60" class="rounded-circle">
+                                    <img src="images/profiles/<?php echo $row['image']; ?>" width="60" height="60" class="rounded-circle">
                                 </td>
-                                <td class="align-middle ">ahmed</td>
-                                <td class="align-middle">0623534633</td>
-                                <td class="align-middle">ahmed01@gmail.com</td>
-                                <td class="align-middle">40 hbdfh hzif ehiezz</td>
+                                <td class="align-middle "><?php echo $row['fname'].' ' . $row['lname']; ?></td>
+                                <td class="align-middle"><?php echo $row['phone']; ?></td>
+                                <td class="align-middle"><?php echo $row['email']; ?></td>
+                                <td class="align-middle"><?php echo $row['address']; ?></td>
                                 <td class="text-primary align-middle \">
                                     <div class="d-flex flex-nowrap gap-3\">
                                         <a href="modify.php"><i class="bi bi-pencil-square"></i></a>
@@ -68,64 +100,10 @@
                                         </button>
                                     </div>
                                 </td>
-                            </tr>
-                            <!-- --------------- -->
-                            <tr class="bg-white shadow">
-                                <td class="align-middle">
-                                    <img src="images/profiles/3.png" width="60" height="60" class="rounded-circle">
-                                </td>
-                                <td class="align-middle ">ahmed</td>
-                                <td class="align-middle">0623534633</td>
-                                <td class="align-middle">ahmed01@gmail.com</td>
-                                <td class="align-middle">40 hbdfh hzif ehiezz</td>
-                                <td class="text-primary align-middle \">
-                                    <div class="d-flex flex-nowrap gap-3\">
-                                        <a href=""><i class="bi bi-pencil-square"></i></a>
-                                        <a href=""><i class="bi bi-trash3 ms-3"></i></a>
-                                        <button type="button" class="eye-btn" data-bs-toggle="modal" data-bs-target="#exampleModaleye">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- --------------- -->
-                            <tr class="bg-white shadow">
-                                <td class="align-middle">
-                                    <img src="images/profiles/3.png" width="60" height="60" class="rounded-circle">
-                                </td>
-                                <td class="align-middle ">ahmed</td>
-                                <td class="align-middle">0623534633</td>
-                                <td class="align-middle">ahmed01@gmail.com</td>
-                                <td class="align-middle">40 hbdfh hzif ehiezz</td>
-                                <td class="text-primary align-middle \">
-                                    <div class="d-flex flex-nowrap gap-3\">
-                                        <a href=""><i class="bi bi-pencil-square"></i></a>
-                                        <a href=""><i class="bi bi-trash3 ms-3"></i></a>
-                                        <button type="button" class="eye-btn" data-bs-toggle="modal" data-bs-target="#exampleModaleye">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- --------------- -->
-                            <tr class="bg-white shadow">
-                                <td class="align-middle">
-                                    <img src="images/profiles/3.png" width="60" height="60" class="rounded-circle">
-                                </td>
-                                <td class="align-middle ">ahmed</td>
-                                <td class="align-middle">0623534633</td>
-                                <td class="align-middle">ahmed01@gmail.com</td>
-                                <td class="align-middle">40 hbdfh hzif ehiezz</td>
-                                <td class="text-primary align-middle \">
-                                    <div class="d-flex flex-nowrap gap-3\">
-                                        <a href=""><i class="bi bi-pencil-square"></i></a>
-                                        <a href=""><i class="bi bi-trash3 ms-3"></i></a>
-                                        <button type="button" class="eye-btn" data-bs-toggle="modal" data-bs-target="#exampleModaleye">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                             </tr>   
+                            <?php 
+                                } 
+                            ?>
                             <!-- --------------- -->
                             
 
@@ -164,6 +142,7 @@
       <div class="modal-body">
         <form action="" method="POST" id="login-form">
             <div class="d-flex gap-4 mb-3 pe-sm-4">
+            <input type="hidden" name="image" id="" value="" >
                 <div class=" d-flex flex-column text-muted col-sm-6 align-items-start">
                     <label for="">First name</label>
                     <input type="text" name="f-name" id="" value=""  class="w-100 rounded-3 border p-2 form-control">
@@ -187,7 +166,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Add">
+                    <input type="submit" name="sub_add_contact" class="btn btn-primary" value="Add">
                 </div>
             </form>
         </div>

@@ -78,3 +78,13 @@ textarea {
     color: rgb(219, 219, 219);
     font-size: 14px;
 }
+.error_style{
+    font-size: 12px;
+    color: rgb(255, 52, 93);
+}
+.error{
+    border: 1px solid red;
+}
+.seccess{
+    border: 1px solid rgb(5, 187, 44);
+}
