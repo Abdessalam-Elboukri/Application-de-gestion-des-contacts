@@ -35,7 +35,7 @@
                         <p class="text-muted mb-3">Enter your credentials to create your account</p>
                         <div class="signup d-flex justify-content-center flex-wrap gap-2">
                         <form action="signup.php" method="POST" id="signup-form">
-                        <div class="d-flex gap-4 mb-3 pe-sm-4">
+                        <div class="d-flex gap-4 pe-sm-4">
                             <div class=" d-flex flex-column text-muted col-sm-6 align-items-start">
                                 <label for="">First name</label>
                                 <input type="text" name="f-name" id="" value=""  class="fname w-100 rounded-3 border p-2 form-control">
@@ -52,17 +52,17 @@
                                 <input type="email" name="email" id="" value=""  class="email w-100 rounded-3 border p-2 form-control">
                                 <p class="error_style email_error"></p>
                             </div>
-                            <div class=" d-flex flex-column text-muted mt-3 align-items-start">
+                            <div class=" d-flex flex-column text-muted align-items-start">
                                 <label for="">Password</label>
                                 <input type="password" name="password" id="" value=""  class="password w-100 rounded-3 border p-2 form-control">
                                 <p class="error_style pass_error"></p>
                             </div> 
-                            <div class=" d-flex flex-column text-muted mt-3 align-items-start">
+                            <div class=" d-flex flex-column text-muted  align-items-start">
                                 <label for="">Comfirm Password</label>
                                 <input type="password" name="c_password" id="" value=""  class="password2 w-100 rounded-3 border p-2 form-control">
                                 <p class="error_style pass2_error"></p>
                             </div>
-                            <div class="oper-buttons d-flex justify-content-center flex-wrap mt-3">
+                            <div class="oper-buttons d-flex justify-content-center flex-wrap ">
                                 <input type="submit" value="SignUp" name="sign_up_user" class="signup_btn">
                             </div>
                             </form>

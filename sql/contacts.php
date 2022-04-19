@@ -7,17 +7,24 @@
             $this->conn = $conn;
         }
 
-        public function getContacts(){
+        public function getContacts($id){
             $sql = "SELECT * FROM `contacts` where `id_user` = ? ";
             $pre =$this->conn ->prepare($sql);
-            session_start();
-            $pre ->bindParam(1,$_SESSION['id_user'],PDO::PARAM_INT);
-            var_dump($_SESSION['id_user']);
+            $pre ->bindParam(1,$id,PDO::PARAM_INT);
             $pre ->execute();
-            session_write_close();
             $result = $pre->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         }
-//get data from database by the admin
+
+        public function getInputInfo($id){
+            $sql = "SELECT * FROM `contacts` where `id_user` = ? ";
+            $pre =$this->conn ->prepare($sql);
+            $pre ->bindParam(1,$id,PDO::PARAM_INT);
+            $pre ->execute();
+            $result = $pre->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
 
 }
 ?>

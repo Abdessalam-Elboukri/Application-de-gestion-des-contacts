@@ -12,7 +12,7 @@
 <body>
     <main class="back">
     <?php include 'includes/nav.php'; ?>
-     <div class="  d-flex align-items-center mt-4 ">
+     <div class="  d-flex align-items-center mt-5 ">
         <div class="container home-page mb-3 shadow_1 p-sm-3 p-2 col-sm-10 col-lg-9 col-11">
             <div class="d-flex justify-content-between continr align-items-center flex-wrap" >
                 <div class="img-section col-md-5 col-9">
@@ -26,8 +26,8 @@
                             explicabo u
                         </p>
                         <div class="oper-buttons d-flex justify-content-center flex-wrap mb-3 ">
-                            <a href="">Log In</a>
-                            <a href="">Sign Up</a>
+                            <a href="login.php">Log In</a>
+                            <a href="signup.php">Sign Up</a>
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,12 @@
 <?php
 class User {
-    public $conn;
-    function __construct($conn) {
-        $this->conn = $conn;
-      }
-    //fuction to login
+
+public $conn;
+
+function __construct($conn) {
+    $this->conn = $conn;
+    }
+//fuction to login
 public function login($email,$password){
         if(empty($email) || empty($password)){
             echo "Please fill all the fields";
@@ -17,7 +19,6 @@ public function login($email,$password){
         $stmt ->execute();
         $result = $stmt ->fetch(PDO::FETCH_ASSOC);
         if($result){
-            session_start();
             $_SESSION['email'] = $email;
             $_SESSION['password'] = $password;
             $_SESSION['id_user'] = $result['id'];
@@ -48,25 +49,35 @@ public function signup($fname, $lname, $email, $password, $c_password){
     }else{
         if($password != $c_password){
             echo "Password does not match";
-        }else{
-            $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `password` )VALUES(?, ?, ?, ?)";
-            $stmt =$this->conn ->prepare($sql);
-            $stmt -> bindParam(1,$fname, PDO::PARAM_STR);
-            $stmt -> bindParam(2,$lname, PDO::PARAM_STR);
-            $stmt -> bindParam(3,$email, PDO::PARAM_STR);
-            $stmt -> bindParam(4,$password, PDO::PARAM_STR);
-            $stmt->execute();
+        }
+        else{
+            $query = "SELECT * FROM `users` WHERE `email` =?";
+            $prep = $this->conn ->prepare($query);
+            $prep -> bindParam(1,$email, PDO::PARAM_STR);
+            $prep ->execute();
+            $result = $prep ->fetch(PDO::FETCH_ASSOC);
+            if($result){
+                echo'this email is already exist ';
+            }else{
+                $sql = "INSERT INTO `users` (`fname`, `lname`, `email`, `password` )VALUES(?, ?, ?, ?)";
+                $stmt =$this->conn ->prepare($sql);
+                $stmt -> bindParam(1,$fname, PDO::PARAM_STR);
+                $stmt -> bindParam(2,$lname, PDO::PARAM_STR);
+                $stmt -> bindParam(3,$email, PDO::PARAM_STR);
+                $stmt -> bindParam(4,$password, PDO::PARAM_STR);
+                $stmt->execute();
 
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 header('location:./contact.php');
-        
+            }      
         }
     }
 }
 // _________________function add contact _________-
-public function add_contact($image = null, $fname, $lname, $email, $phone, $address){
+public function add_contact($image, $fname, $lname, $email, $phone, $address){
 
+    $target = "images/profiles/".basename($image);
 
     if(empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($address)){//add image for valide
         echo "All fields are required";
@@ -82,13 +93,18 @@ public function add_contact($image = null, $fname, $lname, $email, $phone, $addr
         $pre->bindparam(5,$email, PDO::PARAM_STR);
         $pre->bindparam(6,$phone, PDO::PARAM_STR);
         $pre->bindparam(7,$address, PDO::PARAM_STR);
-        $pre ->execute();       
+        $pre ->execute();  
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+            echo "Image uploaded successfully";
+        }else{
+            echo"Failed to upload image";
+        }     
     }
 
 }
 
 
-public function ModifyContact($fname, $lname, $phone, $email , $address){
+public function ModifyContact($id,$fname, $lname, $phone, $email , $address){
 
         if(empty($fname) || empty($lname) || empty($email) || empty($phone) || empty($address)){
             echo "All fields are required";
@@ -100,12 +116,31 @@ public function ModifyContact($fname, $lname, $phone, $email , $address){
             $stmt -> bindParam(3,$email, PDO::PARAM_STR);
             $stmt -> bindParam(4,$phone, PDO::PARAM_STR);
             $stmt -> bindParam(5,$address, PDO::PARAM_STR);
-            // $stmt -> bindParam(6,$id, PDO::PARAM_INT);
+            $stmt -> bindParam(6,$id, PDO::PARAM_INT);
             $stmt->execute();
             header('location:./contact.php');
             }
 
+            // $sql = "SELECT * FROM `users` WHERE `id` =? ";
+            // $stmt = $this->conn ->prepare($sql);
+            // $stmt -> bindParam(6,$id, PDO::PARAM_INT);
+            // $stmt ->execute();
+            // $result = $stmt ->fetch(PDO::FETCH_ASSOC);
+
+        
+
 }
+
+
+//function to delete contact
+public function delete_contact($id){
+    $sql = "DELETE FROM `contacts` WHERE `id`=?";
+    $stmt = $this->conn ->prepare($sql);
+    $stmt -> bindParam(1,$id, PDO::PARAM_INT);
+    $stmt ->execute();
+    header('location:./contact.php');
+}
+
 
 }
 ?>
