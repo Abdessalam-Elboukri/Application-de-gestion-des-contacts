@@ -3,8 +3,14 @@ a{
     text-decoration: none !important; 
 }
 .back{
-    /* background-image: url(images/Group\ 932.png); */
+    /* background: rgb(31, 197, 202); */
     background-size: 100%;
+    height: 100vh;
+}
+.backprofile{
+    background-image: url(images/backprofile.png);
+    background-size: 100%;
+    height: 100vh;
 }
 .bg-azure{
     background: azure;
@@ -54,7 +60,7 @@ input[type="email"],input[type="text"]{
 .fs-7{
     font-size: 12px;
 }
-.m0{
+.p{
     margin: 0 !important;
 }
 .eye-btn{
@@ -94,3 +100,20 @@ textarea {
 ::-webkit-scrollbar{
     width: 0;
 }
+.profile ul li{
+    display: inline-block;
+    border: 2px solid white;
+    border-radius: 20px;
+    background-color: transparent;
+    padding: 5px 15px;
+    margin-left: 8px;
+}
+.profile ul li a , .profile ul li button{
+    color: white;
+    font-size: 15px;
+    
+}
+.profile ul li:hover{
+    background-color: rgb(255, 102, 105);
+}
+

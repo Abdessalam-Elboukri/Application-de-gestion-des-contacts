@@ -24,7 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <main class="back">
+    <main class="">
     <?php include 'includes/nav.php'; ?>
         <div class="  d-flex align-items-center mt-4 ">
         <div class="container home-page mb-3 shadow_1 p-sm-3 p-2 col-sm-10 col-lg-9 col-11 pt-4 Pb-0">

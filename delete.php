@@ -1,6 +1,5 @@
 <?php
 
-use LDAP\Result;
 
     include_once('sql/config.php');
     include_once('sql/user.php');

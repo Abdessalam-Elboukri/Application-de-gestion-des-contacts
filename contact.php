@@ -1,6 +1,5 @@
 <?php
 session_start();
-use LDAP\Result;
 
     include_once('sql/config.php');
     include_once('sql/user.php');
@@ -8,8 +7,7 @@ use LDAP\Result;
 
     //==================get contact===================
     $contact = new Contacts($conn);
-    $rst = $contact->getContacts(1);
-    echo $_SESSION['id_user'] ;
+    $rst = $contact->getContacts($_SESSION['id_user']);
     //================================================
 
 //    _______add contact___________
@@ -37,35 +35,39 @@ if(isset($_POST['sub_add_contact'])){
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <main class="back">
-        <nav class="navbar navbar-expand-lg navbar-light bg-azure px-3 " >
-            <div class="container">
-                <a class="navbar-brand" href="./index.php">Contact List</a>
+    <main class="">
+    <nav class="navbar navbar-expand-sm navbar-light bg-azure px-3 " >
+                <div class="d-flex  justify-content-between">
+                    <a class="navbar-brand" href="profile.php"><img src="./images/E-Contact1.png" width="90px"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./login.php">signin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./signup.php">signup</a>
-                    </li>
-
-                </ul>
-                <div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    New Contact
-                </button>
                 </div>
+                
+                <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto d-flex align-items">
+                        <li class="nav-item ">
+                            <p class="mt-2"> <?php  echo $_SESSION['fname'] ; ?></abbr></p>
+                        </li>
+                        <li class="nav-item">
+                            <form action="profile.php" method="post">
+                                <input type="submit" name="logout" value="Logout" class=" ms-3 btn btn-outline-danger">
+                            </form>
+                            
+                        </li>
+
+                    </ul>
+                </div>   
             </div>
-            
-        </div>
-    </nav>
-     <div class="  d-flex align-items-center justify-content-center p-2 mt-4 ">
-        <div class=" home-page-contact mb-3 shadow_1  p-2 col-12 col-lg-10" style="overflow:scroll;">
-        <div class="row mt-2 px-1 table-responsive" style="height: 75vh;">
+        </nav>
+        <div class="d-flex justify-content-end mt-3 me-5">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                New Contact
+            </button>
+            </div>
+        <div class="  d-flex align-items-center justify-content-center p-2 mt-4 ">
+            <div class=" home-page-contact mb-3 shadow_1 col-12 col-lg-11" style="overflow:scroll;">
+            <div class="row mt-2 px-1 table-responsive" style=" background-color:rgba(169, 169, 169, 0.315);">
                     <table class="table" style="border-collapse: separate; border-spacing: 0 10px;">
                         <thead>
                             <tr class=" text-muted shadow">
@@ -80,16 +82,14 @@ if(isset($_POST['sub_add_contact'])){
                         <tbody>
                             
                             <?php 
-
-                            //  while($row =  $pre->fetch(PDO::FETCH_ASSOC)){ 
-                            // $result =  $pre->fetch(PDO::FETCH_ASSOC);                              
+                             
                                foreach($rst as $row){
                             ?>
                             <tr class="bg-white shadow text-mutted" style="font-size:13px;">
                                 <td class="align-middle">
                                     <img src="images/profiles/<?php echo $row['image']; ?>" width="60" height="60" class="rounded-circle">
                                 </td>
-                                <td class="align-middle "><?php echo $row['fname'].' ' . $row['lname']; ?></td>
+                                <td class="align-middle td1"><?php echo $row['fname'].' ' . $row['lname']; ?></td>
                                 <td class="align-middle"><?php echo $row['phone']; ?></td>
                                 <td class="align-middle"><?php echo $row['email']; ?></td>
                                 <td class="align-middle"><?php echo $row['address']; ?></td>
@@ -98,6 +98,9 @@ if(isset($_POST['sub_add_contact'])){
                                         <a href="modify.php?id=<?php echo $row['id']; ?>"><i class="bi bi-pencil-square"></i></a>
                                         <a href="delete.php?id=<?php echo $row['id']; ?>" class="delete"><i class="bi bi-trash3 ms-3"></i></a>
                                         <button type="button" class="eye-btn ms-2" data-bs-toggle="modal" data-bs-target="#exampleModaleye">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button type="button" class="eye-btn ms-2" onclick="return popitup('modify.php?id=<?php echo $row['id']; ?>')">
                                             <i class="bi bi-eye"></i>
                                         </button>
                                     </div>
@@ -199,22 +202,22 @@ if(isset($_POST['sub_add_contact'])){
       <div class="modal-body show-profile">
         <div class="d-flex justify-content-center mb-3">
             <img src="images/profiles/3.png" alt="" class="profile-img-modal" >
-        </div>
+        </div>       
         <div class="d-flex">
             <h5>Full Name : </h5>
-            <p class="ms-2">Simona Santoro</p>
+            <p class="ms-2 name"></p>
         </div>
         <div class="d-flex">
             <h5>Phone : </h5>
-            <p class="ms-2">0654673428</p>
+            <p class="ms-2 phone">0654673428</p>
         </div>
         <div class="d-flex">
             <h5>E-mail : </h5>
-            <p class="ms-2">simonasantoro@gmail.com</p>
+            <p class="ms-2 email">simonasantoro@gmail.com</p>
         </div>
         <div class="d-flex">
             <h5>Address : </h5>
-            <p class="ms-2">20hchcj jhscbjqcbq qcbq jqcqc</p>
+            <p class="ms-2 address">20hchcj jhscbjqcbq qcbq jqcqc</p>
         </div>
       </div>
     </div>
@@ -222,7 +225,35 @@ if(isset($_POST['sub_add_contact'])){
 </div>
 
 
-    <!-- end view contact modal -->
+    <!-- <script src="aff.js"></script>
+    //script to show the info of the user in the modal -->
+    
+    <script>
+        // const eye_icon= document.querySelectorAll('.eye-btn');
+        // const name= document.querySelector('.name');
+        // const phone= document.querySelector('.phone');
+        // const email= document.querySelector('.email');
+        // const address= document.querySelector('.address');
 
+        // const td1 = document.querySelector('.td1');
+
+        // eye_icon.forEach(eye=>{
+        //     eye.addEventListener('click',function(){
+                
+        //             console.log(data);
+        //             name.innerHTML= td1.innerText;
+                    
+        //         })
+        //     })
+
+            function popitup(url) {
+            newwindow=window.open(url,'name','height=800,width=700');  
+            if(!newindow){
+                alert('problem has been occurred');}
+            // if (window.focus) {newwindow.focus()}
+            // return false;
+}
+
+    </script>
     </body>
 </html>
