@@ -4,7 +4,7 @@
     include('sql/user.php');
 
     if(isset($_POST['submit'])){
-        $user = new User($conn);
+        $user = new User();
         $user->login($_POST['email_login'],$_POST['password_login']);
     }
 

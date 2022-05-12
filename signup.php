@@ -4,7 +4,7 @@
     include('sql/user.php');
 
     if(isset($_POST['sign_up_user'])){
-        $user = new User($conn);
+        $user = new User();
         $user->signup($_POST['f-name'],$_POST['l-name'],$_POST['email'],$_POST['password'],$_POST['c_password']);
     }
 

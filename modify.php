@@ -3,9 +3,9 @@ include_once('sql/config.php');
 include_once('sql/user.php');
 include_once('sql/contacts.php');
 
-
-    $user= new User($conn);;
-    $contacts= new Contacts($conn);
+    session_start();
+    $user= new User();;
+    $contacts= new Contacts();
 
     $contact=$contacts->getInputInfo($_GET['id']);
 

@@ -6,7 +6,7 @@ include_once('sql/contacts.php');
 session_start();
 
 
-$user = new User($conn);
+$user = new User();
 $rslt=$user->get_user_data($_SESSION['email']);
 
 

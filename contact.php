@@ -6,7 +6,7 @@ session_start();
     include_once('sql/contacts.php');
 
     //==================get contact===================
-    $contact = new Contacts($conn);
+    $contact = new Contacts();
     $rst = $contact->getContacts($_SESSION['id_user']);
     //================================================
 
@@ -100,15 +100,12 @@ if(isset($_POST['sub_add_contact'])){
                                         <button type="button" class="eye-btn ms-2" data-bs-toggle="modal" data-bs-target="#exampleModaleye">
                                             <i class="bi bi-eye"></i>
                                         </button>
-                                        <button type="button" class="eye-btn ms-2" onclick="return popitup('modify.php?id=<?php echo $row['id']; ?>')">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
                                     </div>
                                 </td>
                              </tr>   
                             <?php 
                                  } 
-                            ?>
+                               ?>
                         </tbody>
                     </table>
                 </div>
@@ -116,7 +113,7 @@ if(isset($_POST['sub_add_contact'])){
         </div>
     </main>
     <script>
-    //add a function with sweet alert
+    //add a function sweet alert
     $('.delete').click(function(e){
         e.preventDefault();
         var href = $(this).attr('href');

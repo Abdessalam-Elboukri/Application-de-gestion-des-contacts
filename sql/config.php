@@ -1,17 +1,27 @@
 <?php
-
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "app_contact";
-	
-				try{
-					$conn= new PDO("mysql:host={$servername};dbname={$dbname}",$username,$password);
-				}catch(PDOException $e){
-					die("Connection failed: ".$e->getMessage());
-					 
+		class DbConnection{
+			private $host = 'localhost';
+			private $username = 'root';
+			private $password = '';
+			private $database = 'app_contact';
+		 
+			public $connection;
+		 
+			public function __construct(){
+		 
+				if (!isset($this->connection)) {
+		 
+					$this->connection = new pdo("mysql:host={$this->host};dbname={$this->database}",$this->username,$this->password);
+		 
+					if (!$this->connection) {
+						echo 'Cannot connect to database server';
+						exit;
+					}
 				}
-				return $conn ;
+		 
+				return $this->connection;
+			}
+		}
 
 	
 ?>
